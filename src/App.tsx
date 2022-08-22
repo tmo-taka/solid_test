@@ -1,9 +1,22 @@
-import type { Component } from 'solid-js';
+import { Component, createSignal } from 'solid-js';
 
 import logo from './logo.svg';
 import styles from './App.module.css';
 
 const App: Component = () => {
+
+  console.log("再描画されない！！")
+
+  const [count,setCount] = createSignal<number>(0);
+
+  const addCount = ():void =>{
+    setCount((num: number) => num +1)
+  }
+
+  const reduceCount = ():void => {
+    setCount((num: number) => num === 0 ? 0 : num -1)
+  }
+
   return (
     <div class={styles.App}>
       <header class={styles.header}>
@@ -20,6 +33,9 @@ const App: Component = () => {
           Learn Solid
         </a>
       </header>
+      <div>count: {count}</div>
+      <button onClick={() => addCount()}>plus</button>
+      <button onClick={() => reduceCount()}>minus</button>
     </div>
   );
 };
